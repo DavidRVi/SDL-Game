@@ -16,6 +16,9 @@ ModuleTextures::ModuleTextures()
 // Destructor
 ModuleTextures::~ModuleTextures()
 {
+	for (std::list<SDL_Texture*>::iterator it = textures.begin(); it != textures.end(); ++it)
+		delete *it;
+
 	IMG_Quit();
 }
 

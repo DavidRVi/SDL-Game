@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Globals.h"
+
 class Application;
 
 class Module
@@ -8,6 +10,11 @@ public:
 
 	Module()
 	{
+	}
+
+	virtual ~Module()
+	{
+
 	}
 
 	virtual bool Init() 

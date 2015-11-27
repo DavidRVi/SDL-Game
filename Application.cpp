@@ -24,11 +24,8 @@ Application::Application()
 
 Application::~Application()
 {
-	CleanUp();
-	delete window;
-	delete renderer;
-	delete textures;
-	delete input;
+	for (list<Module*>::iterator it = modules.begin(); it != modules.end(); ++it)
+		delete (*it);
 
 	modules.clear();
 	// TODO 6: Free module memory and check the result in Dr. Memory
