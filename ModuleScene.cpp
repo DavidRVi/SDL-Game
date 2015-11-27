@@ -12,10 +12,10 @@ ModuleScene::ModuleScene() {
 }
 
 ModuleScene::~ModuleScene() {
-	for (list<string*>::iterator it = texturePaths.begin(); it != texturePaths.end(); ++it)
-		delete *it;
+	//for (list<string*>::iterator it = texturePaths.begin(); it != texturePaths.end(); ++it)
+	//	delete *it;
 
-	texturePaths.clear();
+	//texturePaths.clear();
 	textures.clear();
 }
 
@@ -34,7 +34,10 @@ bool ModuleScene::Start() {
 			textures.push_back(texture);
 		}
 		else ret = false;
+		delete *it;	// free memory from texturePaths list, the texture is already loaded and we don't need its path anymore.
 	}
+
+	texturePaths.clear();	// Destroy texturePaths list because we won't need it anymore.
 
 	return ret;
 }
