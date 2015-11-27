@@ -23,3 +23,5 @@ enum update_status
 #define VSYNC true
 #define TITLE "Super Awesome Game"
 #define SPRITE_FILE "sprites.png"
+#define BACKGROUND_MUSIC "background.ogg"
+#define SOUND_EFFECT "shooting.wav"

@@ -9,6 +9,7 @@ class ModuleWindow;
 class ModuleTextures;
 class ModuleInput;
 class ModuleScene;
+class ModuleAudio;
 
 class Application
 {
@@ -28,6 +29,7 @@ public:
 	ModuleTextures* textures;
 	ModuleInput* input;
 	ModuleScene* scene;
+	ModuleAudio* audio;
 
 private:
 
