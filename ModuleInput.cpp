@@ -1,8 +1,12 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "Application.h"
+#include "ModuleAudio.h"
+
 #include "SDL/include/SDL.h"
 
+using namespace std;
 ModuleInput::ModuleInput()
 {}
 
@@ -44,6 +48,11 @@ update_status ModuleInput::Update()
 	{
 		LOG("Closing game with ESC\n");
 		return UPDATE_STOP;
+	}
+	if (keyboard[SDL_SCANCODE_E])
+	{
+		if (!App->audio->PlaySoundEffect())
+			return UPDATE_STOP;
 	}
 	// Homework: Make the application close up when pressing “X” button of the window
 	SDL_Event events;

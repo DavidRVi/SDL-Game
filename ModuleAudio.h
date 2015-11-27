@@ -15,8 +15,10 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	bool PlaySoundEffect();
 
 private:
 	Mix_Music* background;
 	Mix_Chunk* sound_effect;
+	int channel;
 };

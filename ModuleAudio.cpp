@@ -6,6 +6,7 @@
 ModuleAudio::ModuleAudio() {
 	sound_effect = NULL;
 	background = NULL;
+	channel = -1;
 }
 
 ModuleAudio::~ModuleAudio() {
@@ -59,6 +60,12 @@ bool ModuleAudio::Start() {
 		ret = false;
 	}
 
+	sound_effect = Mix_LoadWAV(SOUND_EFFECT);
+	if (sound_effect == NULL)
+	{
+		LOG("ERROR LOADING WAV MUSIC: %s\n", Mix_GetError());
+		ret = false;
+	}
 	return ret;
 }
 
@@ -75,4 +82,17 @@ bool ModuleAudio::CleanUp() {
 	Mix_CloseAudio();
 
 	return true;
+}
+
+bool ModuleAudio::PlaySoundEffect() {
+	bool ret = true;
+	if (!Mix_Playing(channel))
+		channel = Mix_PlayChannel(-1, sound_effect, 0);
+
+	if (channel == -1) {
+		fprintf(stderr, "Unable to play WAV file: %s\n", Mix_GetError());
+		ret = false;
+	}
+
+	return ret;
 }
