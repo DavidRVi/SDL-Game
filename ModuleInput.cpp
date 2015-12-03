@@ -56,7 +56,7 @@ update_status ModuleInput::Update()
 	}
 	// Homework: Make the application close up when pressing “X” button of the window
 	SDL_Event events;
-	while (SDL_PollEvent(&events)) {		
+	while (SDL_PollEvent(&events)) {
 		if (events.type == SDL_QUIT)
 			return UPDATE_STOP;
 	}

@@ -10,7 +10,7 @@ ModuleAudio::ModuleAudio() {
 }
 
 ModuleAudio::~ModuleAudio() {
-
+	Mix_Quit();
 }
 
 bool ModuleAudio::Init() {
@@ -54,11 +54,6 @@ bool ModuleAudio::Start() {
 		LOG("ERROR LOADING OGG MUSIC: %s\n", Mix_GetError());
 		ret = false;
 	}
-	else if (Mix_PlayMusic(background, -1) == -1)		// second argument -1 : InfiniteLoop
-	{
-		LOG("Unable to play Ogg file: %s\n", Mix_GetError()); 
-		ret = false;
-	}
 
 	sound_effect = Mix_LoadWAV(SOUND_EFFECT);
 	if (sound_effect == NULL)
@@ -66,6 +61,9 @@ bool ModuleAudio::Start() {
 		LOG("ERROR LOADING WAV MUSIC: %s\n", Mix_GetError());
 		ret = false;
 	}
+
+	ret = PlayBackgroundMusic();
+
 	return ret;
 }
 
@@ -75,11 +73,13 @@ update_status ModuleAudio::Update() {
 
 bool ModuleAudio::CleanUp() {
 	Mix_HaltMusic();
+	Mix_CloseAudio();
 	if (sound_effect != NULL)
 		Mix_FreeChunk(sound_effect);
 	if (background != NULL)
 		Mix_FreeMusic(background);
-	Mix_CloseAudio();
+
+	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
 	return true;
 }
@@ -95,4 +95,16 @@ bool ModuleAudio::PlaySoundEffect() {
 	}
 
 	return ret;
+}
+
+bool ModuleAudio::PlayBackgroundMusic() {
+	bool ret = true;
+	if (Mix_PlayMusic(background, -1) == -1)		// second argument -1 : InfiniteLoop
+	{
+		LOG("Unable to play Ogg file: %s\n", Mix_GetError());
+		ret = false;
+	}
+
+	return ret;
+
 }

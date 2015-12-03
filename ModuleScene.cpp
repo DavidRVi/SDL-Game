@@ -16,7 +16,7 @@ ModuleScene::~ModuleScene() {
 	//	delete *it;
 
 	//texturePaths.clear();
-	textures.clear();
+	//textures.clear();
 }
 
 bool ModuleScene::Init() {
@@ -63,6 +63,7 @@ update_status ModuleScene::PostUpdate() {
 }
 
 bool ModuleScene::CleanUp() {
+	textures.clear();
 	return true;
 }
 

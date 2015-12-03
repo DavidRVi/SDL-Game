@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _MODULEAUDIO_H_
+#define _MODULEAUDIO_H_
 #include<list>
 #include "Module.h"
 #include "Globals.h"
@@ -16,9 +17,12 @@ public:
 	update_status Update();
 	bool CleanUp();
 	bool PlaySoundEffect();
+	bool PlayBackgroundMusic();
 
 private:
 	Mix_Music* background;
 	Mix_Chunk* sound_effect;
 	int channel;
 };
+
+#endif
